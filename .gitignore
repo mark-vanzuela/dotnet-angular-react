@@ -1,0 +1,24 @@
+# ---- .NET ----
+bin/
+obj/
+*.user
+[Dd]ebug/
+[Rr]elease/
+.vs/
+*.suo
+
+# ---- Node / Angular / React ----
+node_modules/
+dist/
+.angular/
+npm-debug.log*
+yarn-error.log*
+
+# ---- Editors / OS ----
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# ---- Misc ----
+*.log

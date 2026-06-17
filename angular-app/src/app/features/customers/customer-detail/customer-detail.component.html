@@ -1,0 +1,41 @@
+<section class="page">
+  <header class="page__header">
+    <h1>Customer details</h1>
+    <a class="btn btn--ghost" routerLink="/customers">← Back to list</a>
+  </header>
+
+  @if (loading()) {
+    <p class="muted">Loading…</p>
+  } @else if (error()) {
+    <p class="alert alert--error">{{ error() }}</p>
+  } @else {
+    <!--
+      The `; as c` alias is only allowed on a PRIMARY @if (not on @else if), so we
+      open a fresh @if here. It reads the signal once and aliases it to `c`, so
+      inside this block we can use c.* without repeating the null check.
+      A <dl> (description list) is the semantic element for label/value pairs.
+    -->
+    @if (customer(); as c) {
+    <dl class="details">
+      <dt>Full name</dt>
+      <dd>{{ c.fullName }}</dd>
+
+      <dt>Email</dt>
+      <dd>{{ c.email }}</dd>
+
+      <dt>Phone</dt>
+      <dd>{{ c.phone }}</dd>
+
+      <dt>Created</dt>
+      <dd>{{ c.createdAtUtc }}</dd>
+
+      <dt>Last updated</dt>
+      <dd>{{ c.updatedAtUtc }}</dd>
+    </dl>
+
+    <div class="actions">
+      <a class="btn btn--primary" [routerLink]="['/customers', c.id, 'edit']">Edit</a>
+    </div>
+    }
+  }
+</section>

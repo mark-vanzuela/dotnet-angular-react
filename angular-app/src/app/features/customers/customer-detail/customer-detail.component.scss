@@ -1,0 +1,25 @@
+/*
+  CSS Grid is ideal for a two-column label/value layout. We define one narrow
+  column that sizes to its content (the labels) and one flexible column (1fr)
+  that takes the rest of the width (the values).
+*/
+.details {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem 1.5rem; // row-gap column-gap
+  margin: 0 0 1.5rem;
+
+  dt {
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  dd {
+    margin: 0; // browsers add a default left margin to <dd>; remove it
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}

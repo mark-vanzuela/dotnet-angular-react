@@ -1,0 +1,51 @@
+<!--
+  Angular templates are HTML plus a little extra syntax:
+    {{ value }}              interpolation: print a value
+    (event)="handler()"      bind a DOM event to a method
+    [prop]="expr"            bind a property/attribute to an expression
+    @if / @for               the modern built-in control flow (Angular 17+)
+-->
+<section class="page">
+  <header class="page__header">
+    <h1>Customers</h1>
+    <!-- routerLink navigates without a full page reload (SPA behaviour). -->
+    <a class="btn btn--primary" routerLink="/customers/new">+ New customer</a>
+  </header>
+
+  <!-- @if replaces the old *ngIf. Each branch shows a different state. -->
+  @if (loading()) {
+    <p class="muted">Loading…</p>
+  } @else if (error()) {
+    <p class="alert alert--error">{{ error() }}</p>
+  } @else if (customers().length === 0) {
+    <p class="muted">No customers yet. Create the first one!</p>
+  } @else {
+    <!-- A semantic <table> is the right element for tabular data. -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th class="table__actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- @for replaces *ngFor. `track` tells Angular how to identify each
+             row so it can update the DOM efficiently. -->
+        @for (customer of customers(); track customer.id) {
+          <tr>
+            <td>{{ customer.fullName }}</td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.phone }}</td>
+            <td class="table__actions">
+              <a class="btn btn--ghost" [routerLink]="['/customers', customer.id]">View</a>
+              <a class="btn btn--ghost" [routerLink]="['/customers', customer.id, 'edit']">Edit</a>
+              <button class="btn btn--danger" (click)="deleteCustomer(customer)">Delete</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</section>

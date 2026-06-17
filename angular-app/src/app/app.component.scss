@@ -1,0 +1,20 @@
+.app-header {
+  background: var(--primary);
+  color: #fff;
+  padding: 0.9rem 1.5rem;
+
+  &__brand {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+}
+
+.app-main {
+  // A centred content column with a comfortable max width. `margin: 0 auto`
+  // is the classic trick to horizontally centre a fixed-width block.
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+}

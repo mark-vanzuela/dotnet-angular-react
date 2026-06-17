@@ -1,0 +1,39 @@
+/*
+  Component SCSS is SCOPED: by default these styles only apply to THIS component's
+  template, so a `.table` here never clashes with a `.table` elsewhere. That is
+  one of Angular's nicest features for keeping CSS manageable.
+*/
+
+.table {
+  width: 100%;
+  border-collapse: collapse; // merge cell borders into single lines
+
+  th,
+  td {
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border); // CSS variable, defined globally
+  }
+
+  th {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+  }
+
+  // Zebra striping improves row scanning. :nth-child is a CSS pseudo-class.
+  tbody tr:nth-child(even) {
+    background: var(--surface-alt);
+  }
+
+  // The actions column hugs its content and keeps the buttons on one line.
+  &__actions {
+    width: 1%;
+    white-space: nowrap;
+
+    // Flexbox lays the buttons out in a row with a small, even gap.
+    display: flex;
+    gap: 0.4rem;
+  }
+}

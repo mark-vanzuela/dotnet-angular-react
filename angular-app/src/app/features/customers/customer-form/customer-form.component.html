@@ -1,0 +1,60 @@
+<section class="page">
+  <header class="page__header">
+    <!-- The title changes based on the mode getter in the component. -->
+    <h1>{{ isEditMode ? 'Edit customer' : 'New customer' }}</h1>
+    <a class="btn btn--ghost" routerLink="/customers">← Back to list</a>
+  </header>
+
+  @if (error()) {
+    <p class="alert alert--error">{{ error() }}</p>
+  }
+
+  <!--
+    [formGroup] binds this <form> to the FormGroup in TypeScript.
+    (ngSubmit) fires when the form is submitted (Enter key or submit button).
+    Each input uses formControlName to link to a control by name.
+  -->
+  <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form__field">
+      <!-- <label for>/id pairing makes the label clickable and screen-reader
+           friendly — an easy, important accessibility win. -->
+      <label for="firstName">First name</label>
+      <input id="firstName" type="text" formControlName="firstName" />
+      @if (showError('firstName')) {
+        <small class="form__error">First name is required (max 50 characters).</small>
+      }
+    </div>
+
+    <div class="form__field">
+      <label for="lastName">Last name</label>
+      <input id="lastName" type="text" formControlName="lastName" />
+      @if (showError('lastName')) {
+        <small class="form__error">Last name is required (max 50 characters).</small>
+      }
+    </div>
+
+    <div class="form__field">
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" />
+      @if (showError('email')) {
+        <small class="form__error">A valid email address is required.</small>
+      }
+    </div>
+
+    <div class="form__field">
+      <label for="phone">Phone</label>
+      <input id="phone" type="tel" formControlName="phone" />
+      @if (showError('phone')) {
+        <small class="form__error">Phone is required (max 30 characters).</small>
+      }
+    </div>
+
+    <div class="form__actions">
+      <!-- [disabled] prevents double-submits while the request is in flight. -->
+      <button class="btn btn--primary" type="submit" [disabled]="submitting()">
+        {{ submitting() ? 'Saving…' : (isEditMode ? 'Save changes' : 'Create customer') }}
+      </button>
+      <a class="btn btn--ghost" routerLink="/customers">Cancel</a>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,12 @@
+<!-- App shell: a header that stays on every page, plus the routed content. -->
+<header class="app-header">
+  <a class="app-header__brand" routerLink="/customers">{{ title }}</a>
+</header>
+
+<main class="app-main">
+  <!--
+    <router-outlet> is the placeholder the router fills with the component that
+    matches the current URL (the list, the detail page, or the form).
+  -->
+  <router-outlet />
+</main>
