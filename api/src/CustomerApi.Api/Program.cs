@@ -23,17 +23,24 @@ builder.Services.AddApplication();      // MediatR handlers, validators, pipelin
 builder.Services.AddInfrastructure();   // the in-memory repository
 
 // --- CORS ------------------------------------------------------------------
-// Browsers block a page served from http://localhost:4200 (Angular) from calling
-// an API on a different origin unless the API explicitly allows it. This policy
-// opens the door for our local front-ends.
+// Browsers block a page served from one origin (e.g. http://localhost:4200) from
+// calling an API on a different origin unless the API explicitly allows it.
+//
+// Dev servers love to drift ports (Vite jumps 5173 -> 5174 if 5173 is taken), and
+// hard-coding ports leads to confusing "Is the API running?" CORS failures. So for
+// LOCAL DEVELOPMENT we allow any http://localhost:<port> origin. (In a real
+// production app you would lock this down to your actual front-end domain.)
 const string FrontendCorsPolicy = "AllowLocalFrontends";
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(FrontendCorsPolicy, policy =>
         policy
-            .WithOrigins(
-                "http://localhost:4200", // Angular dev server
-                "http://localhost:5173") // React (Vite) dev server, for later
+            .SetIsOriginAllowed(origin =>
+            {
+                // Allow any localhost / 127.0.0.1 origin regardless of port.
+                return Uri.TryCreate(origin, UriKind.Absolute, out var uri)
+                    && (uri.Host == "localhost" || uri.Host == "127.0.0.1");
+            })
             .AllowAnyHeader()
             .AllowAnyMethod());
 });
