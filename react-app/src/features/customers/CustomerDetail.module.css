@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+/*
+  CSS Grid gives us a clean two-column label/value layout: one column sized to
+  its content (the labels) and one flexible column (1fr) for the values.
+*/
+.details {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem 1.5rem;
+  margin: 0 0 1.5rem;
+}
+
+.details dt {
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.details dd {
+  margin: 0; /* browsers add a default left margin to <dd>; remove it */
+}

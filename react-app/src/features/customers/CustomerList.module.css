@@ -1,0 +1,45 @@
+/*
+  CSS MODULES: this file is imported as `styles` in the .tsx, and each class name
+  gets a unique hashed name at build time (e.g. .table -> .table_x3f9a). That
+  means these styles are SCOPED to this component and can never clash with a
+  `.table` elsewhere — the React equivalent of Angular's scoped component CSS.
+  We use plain global classes (.btn, .alert) for shared things; see index.css.
+*/
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.table th {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+/* Zebra striping for easier row scanning. */
+.table tbody tr:nth-child(even) {
+  background: var(--surface-alt);
+}
+
+.actions {
+  width: 1%;
+  white-space: nowrap;
+  display: flex;
+  gap: 0.4rem;
+}

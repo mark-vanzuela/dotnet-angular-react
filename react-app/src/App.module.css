@@ -1,0 +1,20 @@
+.header {
+  background: var(--primary);
+  color: #fff;
+  padding: 0.9rem 1.5rem;
+}
+
+.brand {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.main {
+  /* A centred content column. `margin: 0 auto` horizontally centres a fixed
+     max-width block — a classic CSS layout trick. */
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
